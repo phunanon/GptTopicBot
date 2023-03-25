@@ -1,0 +1,18 @@
+{
+  "name": "gpttopicbot",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "exports": "./out/index.js",
+  "author": "Patrick Bowen",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "chatgpt": "^5.0.10",
+    "discord.js": "^14.8.0",
+    "dotenv": "^16.0.3",
+    "wikipedia": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.2"
+  }
+}
