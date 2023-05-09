@@ -80,9 +80,9 @@ async function ask(interaction: CommandInteraction) {
   const about = aboutChannel ?? interaction.guildId!;
 
   const question = `${interaction.options.get("question")?.value}`;
-  if (!question || question.length > 4096) {
+  if (!question || question.length > 2048) {
     await interaction.reply({
-      content: "Please provide a question in fewer than 4096 characters",
+      content: "Please provide a question in fewer than 2048 characters",
       ephemeral: true,
     });
     return;
@@ -118,7 +118,7 @@ async function ask(interaction: CommandInteraction) {
     embeds: [
       {
         title: aboutChannel
-          ? `Question about about <#${aboutChannel}>`
+          ? `Question about <#${aboutChannel}>`
           : `Question about ${preamble.name}`,
         description: question,
         color: 0x00a67e,

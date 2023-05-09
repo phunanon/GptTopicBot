@@ -10,6 +10,7 @@ export async function converse(
     completionParams: {
       temperature: 0.4,
       top_p: 0.8,
+      max_tokens: 2048,
       model: "gpt-3.5-turbo",
       user,
     },
