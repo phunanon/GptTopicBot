@@ -9,6 +9,7 @@ assert(process.env.OPENAI_API_KEY, "OPENAI_API_KEY is required");
 assert(process.env.DISCORD_TOKEN, "DISCORD_TOKEN is required");
 assert(process.env.GUILD_SNOWFLAKE, "GUILD_SNOWFLAKE is required");
 assert(process.env.ADMIN_SNOWFLAKE, "ADMIN_SNOWFLAKE is required");
+assert(process.env.GUILD_IDS, "GUILD_IDS is required");
 
 const users = new Map<string, Date>();
 
@@ -23,7 +24,7 @@ async function main() {
     await client.application?.commands.create(
       new SlashCommandBuilder()
         .setName("ask")
-        .setDescription("Ask a question about the server or a channel")
+        .setDescription("Ask a question, optionally about a particular channel")
         .addStringOption((option) =>
           option
             .setName("question")
@@ -63,7 +64,14 @@ async function main() {
     }
 
     if (interaction.commandName === "ask") {
-      await ask(interaction);
+      if (process.env.GUILD_IDS?.split(",").includes(interaction.guildId!)) {
+        await ask(interaction);
+      } else {
+        await interaction.reply({
+          content: `Sorry, this server hasn't been whitelisted to use this action, as it costs money. Contact <@${process.env.ADMIN_SNOWFLAKE}> to possibly add it.`,
+          ephemeral: true,
+        });
+      }
     }
     if (interaction.commandName === "wikipedia") {
       await wikipedia(interaction);
