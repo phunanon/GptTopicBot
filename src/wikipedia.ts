@@ -1,6 +1,7 @@
-import { summary } from "wikipedia";
+import { summary, intro } from "wikipedia";
 
 export async function search(query: string) {
-  const { title, description } = await summary(query);
+  const { title } = await summary(query);
+  const description = await intro(title);
   return { title, description };
 }
